@@ -20,3 +20,74 @@ _To be filled in after analysis._
 ---
 
 ## Architecture
+
+HM Land Registry CSVs (2021–2024)
+↓
+Python ETL (pandas, chunked loading)
+↓
+Cleaned Parquet files
+↓
+Snowflake Data Warehouse (star schema)
+↓
+SQL KPI Views
+↓
+Power BI Dashboard (4 pages)
+
+---
+
+## Tech Stack
+
+| Layer           | Tool                        |
+| --------------- | --------------------------- |
+| Ingestion       | Python, pandas              |
+| Storage         | Snowflake (cloud warehouse) |
+| Modelling       | SQL (star schema)           |
+| Visualisation   | Power BI                    |
+| Version Control | Git, GitHub                 |
+
+---
+
+## Project Structure
+
+london-housing-analytics/
+├── data/
+│ ├── raw/ # Original CSV files (gitignored)
+│ └── processed/ # Cleaned parquet files (gitignored)
+├── notebooks/ # Jupyter notebooks (numbered in order)
+├── sql/
+│ ├── ddl/ # CREATE TABLE statements
+│ └── views/ # KPI view definitions
+├── scripts/ # Reusable Python scripts
+├── docs/ # Methodology and data dictionary
+├── screenshots/ # Dashboard images for README
+├── .env # Snowflake credentials (gitignored)
+├── .gitignore
+├── README.md
+└── requirements.txt
+
+---
+
+## Methodology
+
+See [`docs/methodology.md`](docs/methodology.md) for cleaning decisions and analytical approach.
+
+---
+
+## Dashboard Preview
+
+_Screenshots will be added here after the dashboard is built._
+
+---
+
+## Limitations
+
+- Covers England & Wales only (filtered to London)
+- Excludes property purchases via share transfers
+- Prices are nominal (not inflation-adjusted)
+- Recent months may have registration lag (~2 months)
+
+---
+
+## Data Source
+
+[HM Land Registry Price Paid Data](https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads) — Open Government Licence v3.0.
