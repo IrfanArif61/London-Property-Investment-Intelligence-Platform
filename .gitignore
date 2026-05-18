@@ -1,0 +1,29 @@
+# Data files (too large for GitHub)
+data/raw/*.csv
+data/raw/*.txt
+data/processed/*.parquet
+data/processed/*.csv
+
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tableau temp files
+*.twbr
+*.bak
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
