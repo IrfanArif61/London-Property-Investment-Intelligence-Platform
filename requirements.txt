@@ -9,3 +9,4 @@ seaborn
 jupyter
 ipykernel
 boto3
+dbt-snowflake

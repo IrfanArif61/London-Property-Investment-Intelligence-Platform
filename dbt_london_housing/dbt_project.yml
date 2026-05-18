@@ -1,0 +1,34 @@
+name: "dbt_london_housing"
+version: "1.0.0"
+config-version: 2
+
+# Profile name — must match what's in profiles.yml
+profile: "dbt_london_housing"
+
+# Standard dbt folder layout
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configuration
+# Three-layer medallion architecture: staging → intermediate → marts
+models:
+  dbt_london_housing:
+    staging:
+      +schema: staging
+      +materialized: view
+    
+    intermediate:
+      +schema: staging
+      +materialized: view
+    
+    marts:
+      +schema: marts
+      +materialized: table

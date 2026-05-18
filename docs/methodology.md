@@ -108,3 +108,51 @@ _To be documented after dbt mart models are built (Phase 7)._
 ```
 
 ```
+
+## Phase 4 — dbt Project Setup
+
+### Project Structure
+
+The dbt project lives at `dbt_london_housing/` inside the main repo for unified version control.
+dbt_london_housing/
+├── models/
+│ ├── staging/ ← 1:1 clean of raw tables (views)
+│ ├── intermediate/ ← business logic enrichment (views)
+│ └── marts/ ← star schema for BI (tables)
+├── macros/
+│ └── generate_schema_name.sql ← override default schema naming
+├── sources.yml ← source definitions + tests
+├── dbt_project.yml ← project config
+└── ~/.dbt/profiles.yml ← Snowflake connection
+
+### Three-Layer Architecture
+
+- **Staging** (views): minimal transformations — rename, retype, light filtering
+- **Intermediate** (views): enrichment, joins, business logic
+- **Marts** (tables): final analytics-ready facts and dimensions for BI
+
+### Materialisation Strategy
+
+- Staging + Intermediate = views (always fresh, no storage cost)
+- Marts = tables (fast for repeated BI queries from Tableau)
+
+### Source Definition
+
+The raw table `LONDON_HOUSING.RAW.RAW_LAND_REGISTRY` is registered as a dbt source with column documentation and 6 data quality tests:
+
+- Uniqueness on `transaction_id`
+- Not-null on `transaction_id`, `price`, `sale_date`, `postcode`, `source_year`
+
+All 6 tests pass on the 285,791-row source.
+
+### First Staging Model: `stg_land_registry__transactions`
+
+- Casts `sale_date` from string to proper DATE
+- Standardises text columns (postcode, town, district, county) to uppercase
+- Filters out £0 transactions and null dates/postcodes
+- Materialised as view in `LONDON_HOUSING.STAGING`
+- Final row count: 285,791 (no data loss vs source — confirms Phase 2 ingestion quality)
+
+### Custom Schema Naming
+
+Default dbt behaviour prepends the target schema to custom schema names (e.g. `STAGING_marts`). A custom `generate_schema_name` macro overrides this to use schema names directly as defined in `dbt_project.yml`.

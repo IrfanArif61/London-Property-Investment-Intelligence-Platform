@@ -91,3 +91,15 @@ _Screenshots will be added here after the dashboard is built._
 ## Data Source
 
 [HM Land Registry Price Paid Data](https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads) — Open Government Licence v3.0.
+
+## Pipeline Status
+
+**Phase 1** — Project foundation and documentation  
+**Phase 2** — Data ingestion (285,791 London transactions, 2021–2024)  
+**Phase 3** — Multi-layer S3 data lake + Snowflake RAW schema load  
+**Phase 4** — dbt project setup + first staging model + data quality tests  
+**Phase 5** — Staging models (cleaning, code mapping, postcode enrichment)  
+**Phase 6** — Intermediate models (postcode → borough joins)  
+**Phase 7** — Mart models (star schema: facts + dimensions)  
+**Phase 8** — KPI views answering business questions  
+**Phase 9** — Tableau dashboard

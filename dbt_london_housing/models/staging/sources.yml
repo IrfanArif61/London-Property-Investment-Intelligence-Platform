@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw Land Registry property transactions from S3 Silver layer"
+    database: LONDON_HOUSING
+    schema: RAW
+    tables:
+      - name: raw_land_registry
+        description: "Untouched London property transactions (2021-2024)"
+        columns:
+          - name: transaction_id
+            description: "Unique transaction identifier"
+            tests:
+              - unique
+              - not_null
+          - name: price
+            description: "Sale price in GBP"
+            tests:
+              - not_null
+          - name: sale_date
+            description: "Date of sale (string format from source)"
+            tests:
+              - not_null
+          - name: postcode
+            description: "Full UK postcode"
+            tests:
+              - not_null
+          - name: property_type
+            description: "Property type code: D=Detached, S=Semi, T=Terraced, F=Flat, O=Other"
+          - name: new_build
+            description: "Y/N — newly built property"
+          - name: tenure
+            description: "F=Freehold, L=Leasehold"
+          - name: source_year
+            description: "Year of source CSV file"
+            tests:
+              - not_null

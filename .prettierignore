@@ -1,0 +1,3 @@
+*.sql
+**/*.sql
+dbt_london_housing/

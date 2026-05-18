@@ -1,0 +1,33 @@
+[0m23:18:31.903760 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19CD3D410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19CD3FD90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19DD342D0>]}
+
+
+============================== 23:18:31.912768 | f41ac860-5e37-40aa-a0be-90b5abe46fe8 ==============================
+[0m23:18:31.912768 [info ] [MainThread]: Running with dbt=1.11.10
+[0m23:18:31.913289 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\irfan\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt init dbt_london_housing', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m23:18:32.303591 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\irfan\.dbt
+[0m23:18:32.317547 [debug] [MainThread]: Starter project path: C:\Users\irfan\london-housing-analytics\venv\Lib\site-packages\dbt\include\starter_project
+[0m23:18:32.465209 [info ] [MainThread]: 
+Your new dbt project "dbt_london_housing" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m23:18:32.465209 [info ] [MainThread]: Setting up your profile.
+[0m23:18:54.417314 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m23:18:54.417314 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m23:18:54.419326 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m23:20:33.675065 [info ] [MainThread]: Profile dbt_london_housing written to C:\Users\irfan\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m23:20:33.675065 [debug] [MainThread]: Command `dbt init` succeeded at 23:20:33.675065 after 122.01 seconds
+[0m23:20:33.675065 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19BF41250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19DE18B50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E19DE19910>]}
+[0m23:20:33.681123 [debug] [MainThread]: Flushing usage events
+[0m23:20:37.320724 [debug] [MainThread]: An error was encountered while trying to flush usage events
