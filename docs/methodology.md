@@ -156,3 +156,56 @@ All 6 tests pass on the 285,791-row source.
 ### Custom Schema Naming
 
 Default dbt behaviour prepends the target schema to custom schema names (e.g. `STAGING_marts`). A custom `generate_schema_name` macro overrides this to use schema names directly as defined in `dbt_project.yml`.
+
+## Phase 5 — Staging Layer
+
+### Models Built
+
+1. `stg_land_registry__transactions` — main transactions staging
+2. `stg_postcode_boroughs` — postcode district to borough lookup
+
+### Code Mapping
+
+Raw Land Registry codes decoded to readable labels:
+
+| Column        | Raw codes     | Decoded labels                                 |
+| ------------- | ------------- | ---------------------------------------------- |
+| property_type | D, S, T, F, O | Detached, Semi-Detached, Terraced, Flat, Other |
+| tenure        | F, L          | Freehold, Leasehold                            |
+| new_build     | Y, N          | TRUE / FALSE (is_new_build boolean)            |
+| ppd_type      | A, B          | Standard, Additional                           |
+
+Both raw codes and decoded labels are preserved in the staging model to support both technical filtering (codes) and BI display (labels).
+
+### Derived Columns
+
+Added to support time-based and geographic analysis:
+
+- `sale_year`, `sale_month`, `sale_quarter`
+- `sale_month_start`, `sale_quarter_start` (truncated dates for grouping)
+- `postcode_area` (letters before first digit, e.g. SW, NW)
+- `postcode_district` (first half of postcode, e.g. SW1A, NW3)
+
+### Seed: London Postcode -> Borough Mapping
+
+Manual curation of 140+ London postcode districts mapped to 32 boroughs + City of London. Loaded via dbt seed.
+
+**Limitations:**
+
+- Edge postcodes near the M25 boundary may map ambiguously (e.g. some E4 postcodes are technically Essex)
+- Coverage: ~95% of central and inner London transactions
+- For production-grade accuracy would use ONS Postcode Directory (full UK postcode -> LSOA mapping)
+
+### Tests
+
+- All staging models have not-null and uniqueness tests on key columns
+- `accepted_values` tests on `property_type` and `tenure` ensure code mapping completeness
+- Total tests in pipeline: 14 (all passing)
+
+### dbt Lineage
+
+dbt-generated lineage graph shows the data flow:
+RAW.raw_land_registry → stg_land_registry\_\_transactions
+seed.london_postcode_boroughs → stg_postcode_boroughs
+
+See `screenshots/dbt_lineage_phase5.png` for the visual graph.

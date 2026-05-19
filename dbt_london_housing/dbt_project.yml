@@ -32,3 +32,10 @@ models:
     marts:
       +schema: marts
       +materialized: table
+seeds:
+  dbt_london_housing:
+    +schema: staging
+    london_postcode_boroughs:
+      +column_types:
+        postcode_district: VARCHAR(10)
+        borough: VARCHAR(100)

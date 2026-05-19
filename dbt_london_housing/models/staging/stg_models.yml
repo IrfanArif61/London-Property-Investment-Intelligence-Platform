@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_land_registry__transactions
+    description: "Cleaned and decoded London property transactions"
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier from Land Registry"
+        tests:
+          - unique
+          - not_null
+      - name: price
+        description: "Sale price in GBP"
+        tests:
+          - not_null
+      - name: sale_date
+        description: "Date of sale (typed DATE)"
+        tests:
+          - not_null
+      - name: postcode
+        description: "UK postcode, uppercase, trimmed"
+        tests:
+          - not_null
+      - name: property_type
+        description: "Decoded property type: Detached, Semi-Detached, Terraced, Flat, Other"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Detached', 'Semi-Detached', 'Terraced', 'Flat', 'Other', 'Unknown']
+      - name: tenure
+        description: "Decoded tenure: Freehold, Leasehold"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Freehold', 'Leasehold', 'Unknown']
+      - name: is_new_build
+        description: "Boolean flag for new-build properties"
+      - name: sale_year
+        description: "Year extracted from sale_date"
+        tests:
+          - not_null
+      - name: postcode_area
+        description: "Letters before first digit (e.g. SW, NW)"
+        tests:
+          - not_null
+      - name: postcode_district
+        description: "First half of postcode (e.g. SW1A, NW3)"
+        tests:
+          - not_null
+
+  - name: stg_postcode_boroughs
+    description: "London postcode district to borough mapping"
+    columns:
+      - name: postcode_district
+        description: "Postcode district (e.g. SW1A, NW3)"
+        tests:
+          - unique
+          - not_null
+      - name: borough
+        description: "London borough name"
+        tests:
+          - not_null
