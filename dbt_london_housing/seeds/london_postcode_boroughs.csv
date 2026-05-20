@@ -19,11 +19,36 @@ E16,Newham
 E17,Waltham Forest
 E18,Redbridge
 E20,Newham
+E22,Newham
 EC1,Islington
+EC1A,City of London
+EC1M,City of London
+EC1N,City of London
+EC1R,Islington
+EC1V,Islington
+EC1Y,City of London
 EC2,City of London
+EC2A,Hackney
+EC2M,City of London
+EC2N,City of London
+EC2R,City of London
+EC2V,City of London
+EC2Y,City of London
 EC3,City of London
+EC3A,City of London
+EC3M,City of London
+EC3N,City of London
+EC3R,City of London
+EC3V,City of London
 EC4,City of London
+EC4A,City of London
+EC4M,City of London
+EC4N,City of London
+EC4R,City of London
+EC4V,City of London
+EC4Y,City of London
 N1,Islington
+N1C,Camden
 N2,Barnet
 N3,Barnet
 N4,Haringey
@@ -126,6 +151,7 @@ W1S,Westminster
 W1T,Westminster
 W1U,Westminster
 W1W,Westminster
+W1Y,Westminster
 W2,Westminster
 W3,Ealing
 W4,Hounslow
@@ -140,4 +166,18 @@ W12,Hammersmith and Fulham
 W13,Ealing
 W14,Hammersmith and Fulham
 WC1,Camden
+WC1A,Camden
+WC1B,Camden
+WC1E,Camden
+WC1H,Camden
+WC1N,Camden
+WC1R,Camden
+WC1V,Camden
+WC1X,Camden
 WC2,Westminster
+WC2A,Camden
+WC2B,Camden
+WC2E,Westminster
+WC2H,Westminster
+WC2N,Westminster
+WC2R,Westminster

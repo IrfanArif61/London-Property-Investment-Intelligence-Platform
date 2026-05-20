@@ -94,14 +94,12 @@ _Screenshots will be added here after the dashboard is built._
 
 ## Pipeline Status
 
-## Pipeline Status
-
 [DONE] **Phase 1** — Project foundation and documentation
 [DONE] **Phase 2** — Data ingestion (285,791 London transactions, 2021-2024)
 [DONE] **Phase 3** — Multi-layer S3 data lake + Snowflake RAW schema load
 [DONE] **Phase 4** — dbt project setup + sources + data quality tests
-[DONE] **Phase 5** — Staging layer: code mapping, postcode-borough seed, 14 passing tests
-[NEXT] **Phase 6** — Intermediate models (postcode -> borough joins)
-[TODO] **Phase 7** — Mart models (star schema: facts + dimensions)
+[DONE] **Phase 5** — Staging layer: code mapping, postcode-borough seed
+[DONE] **Phase 6** — Intermediate layer: borough enrichment, price bands, analytical flags
+[NEXT] **Phase 7** — Mart models (star schema: facts + dimensions)
 [TODO] **Phase 8** — KPI views answering business questions
 [TODO] **Phase 9** — Tableau dashboard

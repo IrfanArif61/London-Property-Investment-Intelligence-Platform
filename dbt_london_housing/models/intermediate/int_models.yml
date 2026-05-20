@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: int_transactions__enriched_with_borough
+    description: "Transactions joined with London borough via postcode_district. Unmatched postcodes are labelled 'Unmatched' instead of NULL."
+    columns:
+      - name: transaction_id
+        description: "Unique transaction identifier"
+        tests:
+          - unique
+          - not_null
+      - name: price
+        tests:
+          - not_null
+      - name: borough
+        description: "London borough name, or 'Unmatched' if no match"
+        tests:
+          - not_null
+      - name: postcode_district
+        tests:
+          - not_null
+
+  - name: int_transactions__priced
+    description: "Adds price band and market segment classifications"
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: price_band
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - '1. Under £250K'
+                  - '2. £250K-£500K'
+                  - '3. £500K-£750K'
+                  - '4. £750K-£1M'
+                  - '5. £1M-£2M'
+                  - '6. £2M-£5M'
+                  - '7. £5M+'
+      - name: market_segment
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Affordable', 'Mid-Market', 'Premium', 'Super-Prime']
+
+  - name: int_transactions__flagged
+    description: "Final intermediate model with analytical boolean flags. Feeds the marts layer."
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: is_central_london
+        tests:
+          - not_null
+      - name: is_million_plus
+        tests:
+          - not_null
+      - name: is_flat
+        tests:
+          - not_null
+      - name: is_leasehold
+        tests:
+          - not_null

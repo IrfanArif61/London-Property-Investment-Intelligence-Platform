@@ -209,3 +209,63 @@ RAW.raw_land_registry → stg_land_registry\_\_transactions
 seed.london_postcode_boroughs → stg_postcode_boroughs
 
 See `screenshots/dbt_lineage_phase5.png` for the visual graph.
+
+## Phase 6 — Intermediate Layer
+
+### Purpose
+
+The intermediate layer sits between staging and marts. Each model does one focused transformation, making the pipeline modular, testable, and easy to debug.
+
+### Models Built (in dependency order)
+
+1. **`int_transactions__enriched_with_borough`** — joins transactions with the postcode-borough seed
+2. **`int_transactions__priced`** — adds price bands and market segments
+3. **`int_transactions__flagged`** — adds boolean flags for common analytical filters
+
+### Key Design Decisions
+
+**LEFT JOIN, not INNER JOIN, for borough enrichment**
+Preserves all transactions even when postcode doesn't match the seed. Unmatched rows get a 'Unmatched' label rather than NULL, making coverage gaps trivially queryable.
+
+**Numbered price bands**
+Bands are prefixed with sort keys (`1. Under £250K`, `2. £250K-£500K`) to ensure BI tools display them in correct numeric order without custom sort logic.
+
+**Boolean flags for common filters**
+Pre-computed flags like `is_central_london`, `is_million_plus`, `is_flat` centralise business logic in one place rather than duplicating it across BI tools.
+
+### Price Bands
+
+| Band | Range         |
+| ---- | ------------- |
+| 1    | Under £250K   |
+| 2    | £250K - £500K |
+| 3    | £500K - £750K |
+| 4    | £750K - £1M   |
+| 5    | £1M - £2M     |
+| 6    | £2M - £5M     |
+| 7    | £5M+          |
+
+### Market Segments
+
+- **Affordable**: under £500K
+- **Mid-Market**: £500K - £1.5M
+- **Premium**: £1.5M - £5M
+- **Super-Prime**: £5M+
+
+### Central London Definition
+
+Defined as the following boroughs: City of London, Westminster, Kensington and Chelsea, Camden, Islington, Southwark, Lambeth, Hammersmith and Fulham.
+
+This is a slightly broader definition than the official "Inner London" classification but reflects how the property market is commonly segmented by investors and agents.
+
+### Tests
+
+All intermediate models tested for:
+
+- `transaction_id` uniqueness preservation through joins
+- Not-null on key columns
+- `accepted_values` on `price_band` and `market_segment` (ensures categorisation logic is complete)
+
+### Lineage
+
+See `screenshots/dbt_lineage_phase6.png` for the full data flow visualisation.
