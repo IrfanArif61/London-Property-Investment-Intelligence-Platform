@@ -269,3 +269,67 @@ All intermediate models tested for:
 ### Lineage
 
 See `screenshots/dbt_lineage_phase6.png` for the full data flow visualisation.
+
+## Phase 7 — Mart Layer (Star Schema)
+
+### Star Schema Design
+
+The final analytics layer follows Kimball-style dimensional modelling with one fact table and three dimensions:
+
+```
+                     dim_date
+                        |
+                        |
+   dim_location ---  fact_transactions  ---  dim_property
+                        |
+                        |
+                  (numeric measures)
+```
+
+### Tables
+
+**`fact_transactions`** (285,791 rows)
+
+- Grain: one row per property transaction
+- Foreign keys: date_key, location_key, property_key
+- Measures: sale_price, sale_price_million_plus, transaction_count
+- Degenerate dimensions: price_band, market_segment, is_central_london, etc.
+
+**`dim_date`** (1,461 rows)
+
+- Grain: one row per calendar date (2021-01-01 to 2024-12-31)
+- Attributes: year, quarter, month, day-of-week, week-of-year, is_weekend, year_quarter, year_month
+- Generated using `dbt_utils.date_spine`
+
+**`dim_location`** (~150 rows)
+
+- Grain: one row per (postcode_district, borough) combination
+- Attributes: postcode_district, postcode_area, borough, is_central_london, london_region
+- Surrogate key: hash of postcode_district + borough
+
+**`dim_property`** (5 rows)
+
+- Grain: one row per property type
+- Attributes: property_type_name, property_description, property_category
+- Surrogate key: hash of property_type_code
+
+### Surrogate Keys
+
+All dimension joins use hash-based surrogate keys generated via `dbt_utils.generate_surrogate_key`. Benefits over natural keys:
+
+- Deterministic — same inputs always produce the same hash
+- Collision-free in practice (MD5 hash)
+- Fast joins in Snowflake's columnar engine
+- Decoupled from source system codes that may change
+
+### Referential Integrity
+
+dbt `relationships` tests enforce that every foreign key in `fact_transactions` matches a row in the referenced dimension. Acts as database-level referential integrity without needing actual FK constraints (which Snowflake doesn't enforce by default).
+
+### Why Tables, Not Views, in the Mart Layer
+
+Mart models are materialised as **tables** rather than views because:
+
+- Tableau queries them repeatedly — tables are faster than views by orders of magnitude on aggregations
+- Storage cost is negligible (285K rows ≈ a few MB in Snowflake)
+- Pre-computed once per dbt run, reused across thousands of dashboard interactions

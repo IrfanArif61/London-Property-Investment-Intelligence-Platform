@@ -100,6 +100,6 @@ _Screenshots will be added here after the dashboard is built._
 [DONE] **Phase 4** — dbt project setup + sources + data quality tests
 [DONE] **Phase 5** — Staging layer: code mapping, postcode-borough seed
 [DONE] **Phase 6** — Intermediate layer: borough enrichment, price bands, analytical flags
-[NEXT] **Phase 7** — Mart models (star schema: facts + dimensions)
-[TODO] **Phase 8** — KPI views answering business questions
+[DONE] **Phase 7** — Mart layer: star schema (1 fact + 3 dimensions, referential integrity tests)
+[NEXT] **Phase 8** — KPI views answering business questions
 [TODO] **Phase 9** — Tableau dashboard

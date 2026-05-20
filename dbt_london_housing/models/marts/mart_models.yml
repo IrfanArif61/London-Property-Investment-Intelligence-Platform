@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Date dimension covering 2021-01-01 to 2024-12-31"
+    columns:
+      - name: date_key
+        description: "Primary key. Date in YYYY-MM-DD format."
+        tests:
+          - unique
+          - not_null
+      - name: year
+        tests:
+          - not_null
+      - name: quarter
+        tests:
+          - not_null
+      - name: month_number
+        tests:
+          - not_null
+
+  - name: dim_location
+    description: "Location dimension at postcode_district grain"
+    columns:
+      - name: location_key
+        description: "Hashed surrogate key from postcode_district + borough"
+        tests:
+          - unique
+          - not_null
+      - name: postcode_district
+        tests:
+          - not_null
+      - name: borough
+        tests:
+          - not_null
+      - name: london_region
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - 'East London'
+                  - 'East Central London'
+                  - 'North London'
+                  - 'North West London'
+                  - 'South East London'
+                  - 'South West London'
+                  - 'West London'
+                  - 'West Central London'
+                  - 'Other'
+
+  - name: dim_property
+    description: "Property type dimension"
+    columns:
+      - name: property_key
+        description: "Hashed surrogate key from property_type_code"
+        tests:
+          - unique
+          - not_null
+      - name: property_type_code
+        tests:
+          - unique
+          - not_null
+      - name: property_category
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['House', 'Apartment', 'Other']
+
+  - name: fact_transactions
+    description: "Property transaction fact table with FKs to all dimensions and numeric measures"
+    columns:
+      - name: transaction_key
+        description: "Primary key. Unique transaction identifier from Land Registry."
+        tests:
+          - unique
+          - not_null
+      - name: date_key
+        description: "FK to dim_date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: location_key
+        description: "FK to dim_location"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_location')
+                field: location_key
+      - name: property_key
+        description: "FK to dim_property"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_property')
+                field: property_key
+      - name: sale_price
+        description: "Sale price in GBP"
+        tests:
+          - not_null
