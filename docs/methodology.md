@@ -333,3 +333,47 @@ Mart models are materialised as **tables** rather than views because:
 - Tableau queries them repeatedly — tables are faster than views by orders of magnitude on aggregations
 - Storage cost is negligible (285K rows ≈ a few MB in Snowflake)
 - Pre-computed once per dbt run, reused across thousands of dashboard interactions
+
+## Phase 8 — KPI Views (Business Logic Layer)
+
+### Purpose
+
+This layer translates the generic star schema into opinionated views that directly answer the investor's strategic questions. Each view is purpose-built for a specific decision — eliminating ambiguity in BI dashboards.
+
+### Views Built
+
+| View                             | Business Question Answered                            |
+| -------------------------------- | ----------------------------------------------------- |
+| `v_borough_price_trends`         | How are prices evolving per borough over time?        |
+| `v_borough_yoy_growth`           | Which boroughs grew fastest YoY?                      |
+| `v_borough_transaction_velocity` | Where is market liquidity highest?                    |
+| `v_property_type_roi_by_borough` | What property type delivers best returns per borough? |
+| `v_undervalued_postcodes`        | Which specific postcodes are cheap vs their borough?  |
+| `v_new_build_premium`            | What's the new-build price premium per borough?       |
+| `v_tenure_premium`               | What's the freehold price premium per borough?        |
+| `v_market_health_summary`        | Top-line market indicators for executive dashboard    |
+
+### Key Analytical Techniques Used
+
+- **`LAG` window function** — YoY calculations without self-joins
+- **`RANK` and `NTILE`** — borough liquidity ranking and quartile classification
+- **`MEDIAN` over `AVG`** — robust central tendency measures resistant to super-prime outliers
+- **`HAVING COUNT(*) >= N`** — statistical relevance filters (excludes thin markets / rare property combinations)
+- **CTEs for clarity** — every view structured as named query steps rather than nested subqueries
+- **`NULLIF` defensive coding** — prevents divide-by-zero errors in growth calculations
+
+### Why Views, Not Tables, for KPIs
+
+- KPI definitions evolve frequently as business questions change
+- Underlying fact table is already materialised (fast reads)
+- No storage cost — views are query definitions, not stored data
+- Logic changes reflect immediately, no rebuild required
+
+### Tableau Integration
+
+These views become the **primary data sources** for the Tableau dashboard in Phase 9. Tableau workbooks reference views directly:
+
+- Page 1 (Executive Overview) → `v_market_health_summary`
+- Page 2 (Borough Comparison) → `v_borough_yoy_growth` + `v_borough_transaction_velocity`
+- Page 3 (Property Type Analysis) → `v_property_type_roi_by_borough`
+- Page 4 (Postcode Heatmap) → `v_undervalued_postcodes`

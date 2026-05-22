@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: v_borough_price_trends
+    description: "Quarterly price trends per borough — average, median, volatility"
+  
+  - name: v_borough_yoy_growth
+    description: "Year-on-year price growth per borough using LAG window function"
+  
+  - name: v_borough_transaction_velocity
+    description: "Market liquidity per borough — transaction volume rank and quartile tier"
+  
+  - name: v_property_type_roi_by_borough
+    description: "Property type performance per borough — 4-year growth comparison"
+  
+  - name: v_undervalued_postcodes
+    description: "Postcode districts trading below their borough median (value opportunities)"
+  
+  - name: v_new_build_premium
+    description: "New-build vs existing-stock price premium per borough"
+  
+  - name: v_tenure_premium
+    description: "Freehold vs leasehold price premium per borough"
+  
+  - name: v_market_health_summary
+    description: "Executive summary of London-wide market indicators by year"

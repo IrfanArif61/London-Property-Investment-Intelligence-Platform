@@ -101,5 +101,5 @@ _Screenshots will be added here after the dashboard is built._
 [DONE] **Phase 5** — Staging layer: code mapping, postcode-borough seed
 [DONE] **Phase 6** — Intermediate layer: borough enrichment, price bands, analytical flags
 [DONE] **Phase 7** — Mart layer: star schema (1 fact + 3 dimensions, referential integrity tests)
-[NEXT] **Phase 8** — KPI views answering business questions
-[TODO] **Phase 9** — Tableau dashboard
+[DONE] **Phase 8** — KPI layer: 8 business-question views (YoY growth, liquidity, undervalued postcodes, premiums)
+[NEXT] **Phase 9** — Tableau dashboard

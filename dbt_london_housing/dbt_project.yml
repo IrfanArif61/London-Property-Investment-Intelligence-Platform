@@ -32,6 +32,9 @@ models:
     marts:
       +schema: marts
       +materialized: table
+    kpi:
+      +schema: marts
+      +materialized: view
 seeds:
   dbt_london_housing:
     +schema: staging
