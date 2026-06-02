@@ -1,0 +1,6 @@
+PROPERTY_KEY,PROPERTY_TYPE_CODE,PROPERTY_TYPE_NAME,PROPERTY_DESCRIPTION,PROPERTY_CATEGORY
+f186217753c37b9b9f958d906208506e,O,Other,Non-standard property type,Other
+800618943025315f869e4e1f09471012,F,Flat,Apartment within a larger building,Apartment
+f623e75af30e62bbd73d6df5b50bb7b5,D,Detached,Standalone house,House
+b9ece18c950afbfa6b0fdbfa4ff731d3,T,Terraced,House in a row sharing both walls,House
+5dbc98dcc983a70728bd082d1a47546e,S,Semi-Detached,House sharing one wall,House

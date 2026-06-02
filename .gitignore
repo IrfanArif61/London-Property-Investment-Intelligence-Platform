@@ -1,29 +1,46 @@
-# Data files (too large for GitHub)
-data/raw/*.csv
-data/raw/*.txt
-data/processed/*.parquet
-data/processed/*.csv
+# ── Data files (too large for GitHub) ────────────────────────────────────────
+data/raw/
+data/processed/
 
-# Environment variables
+# ── Environment & credentials ─────────────────────────────────────────────────
 .env
+*.env
 
-# Python
+# ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .venv/
 venv/
+env/
 *.egg-info/
+dist/
+build/
 
-# Jupyter
+# ── Jupyter ───────────────────────────────────────────────────────────────────
 .ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# Tableau temp files
+# ── dbt artifacts (generated on every run) ───────────────────────────────────
+dbt_london_housing/target/
+dbt_london_housing/dbt_packages/
+dbt_london_housing/logs/
+
+# ── Tableau ───────────────────────────────────────────────────────────────────
+# Packaged workbook (.twbx) and source workbook (.twb) are committed
+# Extracts and temp files are not
+dashboard/extracts/
+*.hyper
 *.twbr
 *.bak
 
-# VS Code
-.vscode/
+# Dashboard raw fact export is too large; KPI view CSVs are kept
+dashboard/data/fact_transactions.csv
 
-# OS
+# ── IDE & OS ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
+desktop.ini

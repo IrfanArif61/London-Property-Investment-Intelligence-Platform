@@ -1,0 +1,154 @@
+BOROUGH,POSTCODE_DISTRICT,POSTCODE_TRANSACTIONS,POSTCODE_MEDIAN_PRICE,BOROUGH_MEDIAN_PRICE,PRICE_GAP_GBP,PRICE_GAP_PCT,VALUE_POSITION
+Barnet,NW9,1543,444000,565000,-121000,-21.4,Undervalued (10-25% below)
+Barnet,N12,728,475500,565000,-89500,-15.8,Undervalued (10-25% below)
+Barnet,N11,567,525000,565000,-40000,-7.1,In Line With Borough
+Barnet,NW4,629,550000,565000,-15000,-2.7,In Line With Borough
+Barnet,N20,662,565000,565000,0,0.0,In Line With Borough
+Barnet,N3,555,605000,565000,40000,7.1,In Line With Borough
+Barnet,NW7,799,605000,565000,40000,7.1,In Line With Borough
+Barnet,N2,575,724000,565000,159000,28.1,Significant Premium (>25% above)
+Barnet,NW11,727,855000,565000,290000,51.3,Significant Premium (>25% above)
+Bexley,SE2,494,400000,400000,0,0.0,In Line With Borough
+Brent,NW10,1367,515500,522750,-7250,-1.4,In Line With Borough
+Brent,NW2,1265,530000,522750,7250,1.4,In Line With Borough
+Bromley,SE20,683,383500,383500,0,0.0,In Line With Borough
+Camden,WC1H,160,407500,880000,-472500,-53.7,Significantly Undervalued (>25% below)
+Camden,NW5,614,657500,880000,-222500,-25.3,Significantly Undervalued (>25% below)
+Camden,NW6,1745,680700,880000,-199300,-22.6,Undervalued (10-25% below)
+Camden,WC1N,94,762500,880000,-117500,-13.4,Undervalued (10-25% below)
+Camden,NW1,1170,780000,880000,-100000,-11.4,Undervalued (10-25% below)
+Camden,WC1A,45,980000,880000,100000,11.4,Premium (10-25% above)
+Camden,NW3,1490,985000,880000,105000,11.9,Premium (10-25% above)
+Camden,WC2B,47,1000000,880000,120000,13.6,Premium (10-25% above)
+Camden,WC1X,298,1020300,880000,140300,15.9,Premium (10-25% above)
+Camden,N1C,152,1163163,880000,283163,32.2,Significant Premium (>25% above)
+City of London,EC1Y,67,685000,805750,-120750,-15.0,Undervalued (10-25% below)
+City of London,EC1N,64,777500,805750,-28250,-3.5,In Line With Borough
+City of London,EC1A,69,790000,805750,-15750,-2.0,In Line With Borough
+City of London,EC1M,100,805750,805750,0,0.0,In Line With Borough
+City of London,EC2Y,174,880000,805750,74250,9.2,In Line With Borough
+City of London,EC3N,111,953390,805750,147640,18.3,Premium (10-25% above)
+City of London,EC4V,43,1050000,805750,244250,30.3,Significant Premium (>25% above)
+Croydon,SE25,1017,354300,392150,-37850,-9.7,In Line With Borough
+Croydon,SE19,905,430000,392150,37850,9.7,In Line With Borough
+Ealing,W3,1750,496850,555125,-58275,-10.5,Undervalued (10-25% below)
+Ealing,W7,702,518250,555125,-36875,-6.6,In Line With Borough
+Ealing,W5,1443,592000,555125,36875,6.6,In Line With Borough
+Ealing,W13,904,710000,555125,154875,27.9,Significant Premium (>25% above)
+Enfield,N9,717,388000,506000,-118000,-23.3,Undervalued (10-25% below)
+Enfield,N18,432,395000,506000,-111000,-21.9,Undervalued (10-25% below)
+Enfield,N13,635,506000,506000,0,0.0,In Line With Borough
+Enfield,N14,640,596294,506000,90294,17.8,Premium (10-25% above)
+Enfield,N21,502,640500,506000,134500,26.6,Significant Premium (>25% above)
+Greenwich,SE28,524,340000,447500,-107500,-24.0,Undervalued (10-25% below)
+Greenwich,SE18,1737,415000,447500,-32500,-7.3,In Line With Borough
+Greenwich,SE9,1364,445000,447500,-2500,-0.6,In Line With Borough
+Greenwich,SE7,349,450000,447500,2500,0.6,In Line With Borough
+Greenwich,SE3,1210,482750,447500,35250,7.9,In Line With Borough
+Greenwich,SE10,1462,530000,447500,82500,18.4,Premium (10-25% above)
+Hackney,E9,616,530000,578500,-48500,-8.4,In Line With Borough
+Hackney,E5,920,538750,578500,-39750,-6.9,In Line With Borough
+Hackney,N16,1238,578500,578500,0,0.0,In Line With Borough
+Hackney,E8,906,611125,578500,32625,5.6,In Line With Borough
+Hackney,EC2A,218,941500,578500,363000,62.7,Significant Premium (>25% above)
+Hammersmith and Fulham,W14,964,663500,765000,-101500,-13.3,Undervalued (10-25% below)
+Hammersmith and Fulham,W6,1045,750000,765000,-15000,-2.0,In Line With Borough
+Hammersmith and Fulham,W12,1239,780000,765000,15000,2.0,In Line With Borough
+Hammersmith and Fulham,SW6,2726,910000,765000,145000,19.0,Premium (10-25% above)
+Haringey,N17,1174,445000,550000,-105000,-19.1,Undervalued (10-25% below)
+Haringey,N15,868,500000,550000,-50000,-9.1,In Line With Borough
+Haringey,N22,769,510000,550000,-40000,-7.3,In Line With Borough
+Haringey,N4,1473,550000,550000,0,0.0,In Line With Borough
+Haringey,N8,1291,560000,550000,10000,1.8,In Line With Borough
+Haringey,N10,651,720000,550000,170000,30.9,Significant Premium (>25% above)
+Haringey,N6,567,812500,550000,262500,47.7,Significant Premium (>25% above)
+Hounslow,W4,1467,790000,790000,0,0.0,In Line With Borough
+Islington,N7,950,550000,687500,-137500,-20.0,Undervalued (10-25% below)
+Islington,N19,644,610000,687500,-77500,-11.3,Undervalued (10-25% below)
+Islington,N1,2143,675000,687500,-12500,-1.8,In Line With Borough
+Islington,N5,645,700000,687500,12500,1.8,In Line With Borough
+Islington,EC1V,892,864800,687500,177300,25.8,Significant Premium (>25% above)
+Islington,EC1R,129,940000,687500,252500,36.7,Significant Premium (>25% above)
+Kensington and Chelsea,W10,414,719000,1150000,-431000,-37.5,Significantly Undervalued (>25% below)
+Kensington and Chelsea,SW5,486,880000,1150000,-270000,-23.5,Undervalued (10-25% below)
+Kensington and Chelsea,SW10,609,1100000,1150000,-50000,-4.3,In Line With Borough
+Kensington and Chelsea,W11,676,1150000,1150000,0,0.0,In Line With Borough
+Kensington and Chelsea,SW3,854,1488480,1150000,338480,29.4,Significant Premium (>25% above)
+Kensington and Chelsea,SW7,681,1500000,1150000,350000,30.4,Significant Premium (>25% above)
+Kensington and Chelsea,W8,658,1750000,1150000,600000,52.2,Significant Premium (>25% above)
+Lambeth,SW16,2190,475000,545000,-70000,-12.8,Undervalued (10-25% below)
+Lambeth,SE27,591,500000,545000,-45000,-8.3,In Line With Borough
+Lambeth,SW2,1413,508000,545000,-37000,-6.8,In Line With Borough
+Lambeth,SW9,895,520000,545000,-25000,-4.6,In Line With Borough
+Lambeth,SE11,684,570000,545000,25000,4.6,In Line With Borough
+Lambeth,SW4,1113,625000,545000,80000,14.7,Premium (10-25% above)
+Lambeth,SE24,466,668250,545000,123250,22.6,Premium (10-25% above)
+Lambeth,SW8,1344,675000,545000,130000,23.9,Premium (10-25% above)
+Lewisham,SE8,550,410000,436944,-26944,-6.2,In Line With Borough
+Lewisham,SE14,599,425000,436944,-11944,-2.7,In Line With Borough
+Lewisham,SE6,1152,428250,436944,-8694,-2.0,In Line With Borough
+Lewisham,SE13,1178,435000,436944,-1944,-0.4,In Line With Borough
+Lewisham,SE12,596,438888,436944,1944,0.4,In Line With Borough
+Lewisham,SE26,845,450000,436944,13056,3.0,In Line With Borough
+Lewisham,SE23,974,461250,436944,24306,5.6,In Line With Borough
+Lewisham,SE4,744,550000,436944,113056,25.9,Significant Premium (>25% above)
+Merton,SW19,2438,586650,618325,-31675,-5.1,In Line With Borough
+Merton,SW20,917,650000,618325,31675,5.1,In Line With Borough
+Newham,E13,580,397440,441113,-43673,-9.9,In Line With Borough
+Newham,E6,866,402500,441113,-38613,-8.8,In Line With Borough
+Newham,E12,359,430000,441113,-11113,-2.5,In Line With Borough
+Newham,E15,883,440000,441113,-1113,-0.3,In Line With Borough
+Newham,E16,1885,442225,441113,1112,0.3,In Line With Borough
+Newham,E7,708,475000,441113,33887,7.7,In Line With Borough
+Newham,E20,113,555000,441113,113887,25.8,Significant Premium (>25% above)
+Newham,E22,234,697600,441113,256487,58.1,Significant Premium (>25% above)
+Redbridge,E18,587,475000,475000,0,0.0,In Line With Borough
+Richmond upon Thames,SW14,509,887000,979750,-92750,-9.5,In Line With Borough
+Richmond upon Thames,SW13,504,1072500,979750,92750,9.5,In Line With Borough
+Southwark,SE5,904,478500,600000,-121500,-20.3,Undervalued (10-25% below)
+Southwark,SE15,1217,485000,600000,-115000,-19.2,Undervalued (10-25% below)
+Southwark,SE16,1103,490000,600000,-110000,-18.3,Undervalued (10-25% below)
+Southwark,SE17,753,600000,600000,0,0.0,In Line With Borough
+Southwark,SE22,961,601500,600000,1500,0.3,In Line With Borough
+Southwark,SE1,1945,640000,600000,40000,6.7,In Line With Borough
+Southwark,SE21,372,700000,600000,100000,16.7,Premium (10-25% above)
+Tower Hamlets,E3,1396,420000,510500,-90500,-17.7,Undervalued (10-25% below)
+Tower Hamlets,E1,1210,500000,510500,-10500,-2.1,In Line With Borough
+Tower Hamlets,E2,827,510500,510500,0,0.0,In Line With Borough
+Tower Hamlets,E14,3052,520000,510500,9500,1.9,In Line With Borough
+Tower Hamlets,E1W,415,700000,510500,189500,37.1,Significant Premium (>25% above)
+Waltham Forest,E10,1037,462000,502250,-40250,-8.0,In Line With Borough
+Waltham Forest,E4,1427,500000,502250,-2250,-0.4,In Line With Borough
+Waltham Forest,E17,2768,504500,502250,2250,0.4,In Line With Borough
+Waltham Forest,E11,1259,528000,502250,25750,5.1,In Line With Borough
+Wandsworth,SW17,2068,585000,621000,-36000,-5.8,In Line With Borough
+Wandsworth,SW15,1678,600000,621000,-21000,-3.4,In Line With Borough
+Wandsworth,SW18,2505,621000,621000,0,0.0,In Line With Borough
+Wandsworth,SW12,1160,697500,621000,76500,12.3,Premium (10-25% above)
+Wandsworth,SW11,3190,805000,621000,184000,29.6,Significant Premium (>25% above)
+Westminster,SW1V,530,655000,1584375,-929375,-58.7,Significantly Undervalued (>25% below)
+Westminster,W9,923,680000,1584375,-904375,-57.1,Significantly Undervalued (>25% below)
+Westminster,NW8,848,858750,1584375,-725625,-45.8,Significantly Undervalued (>25% below)
+Westminster,WC2H,79,900000,1584375,-684375,-43.2,Significantly Undervalued (>25% below)
+Westminster,W2,1325,950000,1584375,-634375,-40.0,Significantly Undervalued (>25% below)
+Westminster,SW1P,480,1066750,1584375,-517625,-32.7,Significantly Undervalued (>25% below)
+Westminster,WC2E,32,1189000,1584375,-395375,-25.0,Undervalued (10-25% below)
+Westminster,W1T,190,1295000,1584375,-289375,-18.3,Undervalued (10-25% below)
+Westminster,W1W,113,1382901,1584375,-201474,-12.7,Undervalued (10-25% below)
+Westminster,WC2N,31,1425000,1584375,-159375,-10.1,Undervalued (10-25% below)
+Westminster,W1H,284,1447500,1584375,-136875,-8.6,In Line With Borough
+Westminster,W1U,232,1477500,1584375,-106875,-6.7,In Line With Borough
+Westminster,SW1W,312,1550000,1584375,-34375,-2.2,In Line With Borough
+Westminster,W1F,159,1618750,1584375,34375,2.2,In Line With Borough
+Westminster,W1G,119,1685000,1584375,100625,6.4,In Line With Borough
+Westminster,SW1H,91,1764600,1584375,180225,11.4,Premium (10-25% above)
+Westminster,SW1Y,42,1965000,1584375,380625,24.0,Premium (10-25% above)
+Westminster,WC2R,33,2000000,1584375,415625,26.2,Significant Premium (>25% above)
+Westminster,SW1E,61,2100000,1584375,515625,32.5,Significant Premium (>25% above)
+Westminster,W1D,59,2523080,1584375,938705,59.2,Significant Premium (>25% above)
+Westminster,SW1X,343,2750000,1584375,1165625,73.6,Significant Premium (>25% above)
+Westminster,W1J,120,3050000,1584375,1465625,92.5,Significant Premium (>25% above)
+Westminster,W1K,203,3650000,1584375,2065625,130.4,Significant Premium (>25% above)
+Westminster,W1B,40,3825000,1584375,2240625,141.4,Significant Premium (>25% above)
+Westminster,W1S,128,4200000,1584375,2615625,165.1,Significant Premium (>25% above)
+Westminster,SW1A,75,7100000,1584375,5515625,348.1,Significant Premium (>25% above)

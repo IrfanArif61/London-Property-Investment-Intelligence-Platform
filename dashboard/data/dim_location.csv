@@ -1,0 +1,174 @@
+LOCATION_KEY,POSTCODE_DISTRICT,POSTCODE_AREA,BOROUGH,IS_CENTRAL_LONDON,LONDON_REGION
+a3299962004b7e250784d44a18db2094,E14,E,Tower Hamlets,FALSE,East London
+19a670a94e76ddbaec13eebadf6836bf,E15,E,Newham,FALSE,East London
+b30dbd5c1086d09e420bfdaebaaa582b,NW7,NW,Barnet,FALSE,North West London
+761a5c6969f2f6711243c3d13922a79c,N15,N,Haringey,FALSE,North London
+570794ba262210ff37cb1bbf5a28b495,E2,E,Tower Hamlets,FALSE,East London
+72af5dfc416109a57fafbcbcfd057640,E12,E,Newham,FALSE,East London
+ed777a5abcbef4afd9ab3d1dbfe0f83f,SE23,SE,Lewisham,FALSE,South East London
+f9b7b342ff4dceb5eee286d9d0bbd68b,SE21,SE,Southwark,TRUE,South East London
+9883c6bcdcb30010faedb73819939e86,SE13,SE,Lewisham,FALSE,South East London
+9cc1584c084f1c98cdf821989cba9961,W1W,W,Westminster,TRUE,West London
+289fc86d044142cc7e1d400cdf294da7,WC1B,WC,Camden,TRUE,West Central London
+cf935fd5c0352bae377281cc6986d2ed,WC2E,WC,Westminster,TRUE,West Central London
+b73f5abd01d03b7bc0820d516a75368f,SW12,SW,Wandsworth,FALSE,South West London
+dc28a63267813630713afd49565bcc91,W4,W,Hounslow,FALSE,West London
+22db5461f51556674b34576098e33713,WC1X,WC,Camden,TRUE,West Central London
+eceeb5f4fc6860bebe5b9215b34057f2,SE3,SE,Greenwich,FALSE,South East London
+bf279a4feb954e7d603643c321272deb,SW1X,SW,Westminster,TRUE,South West London
+d6dfbb459faf990f2e46e0e7c5c93dd2,EC1V,EC,Islington,TRUE,East Central London
+25e39be0f69dc282083339c5228a7f84,W6,W,Hammersmith and Fulham,TRUE,West London
+c25a863f75bfee82ed0683893a3fd8e1,NW10,NW,Brent,FALSE,North West London
+5a0691cdbd8abd4dfe88d86ea2b2e28a,N6,N,Haringey,FALSE,North London
+fd149998d7a6a1e961953d0101a40209,W1B,W,Westminster,TRUE,West London
+62a04f55f22e048896432ce001ced829,SW7,SW,Kensington and Chelsea,TRUE,South West London
+d0c4c80cf89950d1473d545b62ec3b95,N3,N,Barnet,FALSE,North London
+b02c2e8ef5e7c4e230a485924abda5c3,SE11,SE,Lambeth,TRUE,South East London
+759015e82210d23107be62dce4b89a7c,SW20,SW,Merton,FALSE,South West London
+200dfd2a63d811ce3615f5f198d94fef,SW1E,SW,Westminster,TRUE,South West London
+5a8383590bc70b29d7bfda68eafac333,EC3M,EC,City of London,TRUE,East Central London
+d092ee3629d54c7736f4a045e5822ec3,SW1V,SW,Westminster,TRUE,South West London
+5fc693c18cb8a707eee861939d1c553a,E1W,E,Tower Hamlets,FALSE,East London
+f4153e2eb577d47e67d600e1d7b3f31e,SW1P,SW,Westminster,TRUE,South West London
+3e95758856c1bc31be355c771730bc0a,WC2H,WC,Westminster,TRUE,West Central London
+85c4dd9299da5d5f8c613bfdd3453c96,EC2R,EC,City of London,TRUE,East Central London
+fe89e43b12284274e0e62cbdd2cad8f9,EC2M,EC,City of London,TRUE,East Central London
+b7cb514274cc7a32a6b46811fd20bcbb,SE24,SE,Lambeth,TRUE,South East London
+45a47a4a4155788b150eb4a4fa2e5863,EC3V,EC,City of London,TRUE,East Central London
+2463cf4643199adda6936e0229a58890,W9,W,Westminster,TRUE,West London
+b9f961dbcc6e629e67285431e45cfedd,E17,E,Waltham Forest,FALSE,East London
+08383539e14d7d6eb8873d143b05ae22,EC2A,EC,Hackney,FALSE,East Central London
+61e7b8107bbef1220b84b96834b52568,SE20,SE,Bromley,FALSE,South East London
+5cbb0c809e8e5bcbce6b26099a7a9173,N9,N,Enfield,FALSE,North London
+9938316893f472333e12ff94d2ce0201,W8,W,Kensington and Chelsea,TRUE,West London
+bd077789b9d8f44bc3caa1b87c65c6da,W1D,W,Westminster,TRUE,West London
+2dc31dd4534195fd6b3013ff8362eac7,WC2R,WC,Westminster,TRUE,West Central London
+7c447d393f149bc0575f4fd2d27062d0,N21,N,Enfield,FALSE,North London
+7b1cd5b57d8862ed63e6011e71bcd1c4,E11,E,Waltham Forest,FALSE,East London
+c8e244348be0470c1505a2fe71a08875,SW17,SW,Wandsworth,FALSE,South West London
+5cfb9e859fe8fb4554d13ba2ef8d2626,N17,N,Haringey,FALSE,North London
+cfbbf8f389570caf0a9fc76ed49f9bad,E20,E,Newham,FALSE,East London
+9bfd8a0b7369b60cfb9a13c17a4ef2ec,E7,E,Newham,FALSE,East London
+1d46db2a3723b569c4c031fb4aadcac3,SE25,SE,Croydon,FALSE,South East London
+2f070fa64956b980dfa4521d514fe45a,N11,N,Barnet,FALSE,North London
+849152ed5df55e245933cfe268189563,N12,N,Barnet,FALSE,North London
+5151c5467c694c9a800cd944e8121862,SE18,SE,Greenwich,FALSE,South East London
+a2de935b00a1a2ae1a929b3dc9685974,EC1Y,EC,City of London,TRUE,East Central London
+58d52bf0b2c174e677550140e2893f49,W1J,W,Westminster,TRUE,West London
+1de52821f645c8475ead07de7f72eda7,SW1W,SW,Westminster,TRUE,South West London
+61b45a87351d30dc660ef6d5b21d9bbe,EC4Y,EC,City of London,TRUE,East Central London
+ddd1120eb7e5fa3eb942ee66259e9fd9,SE14,SE,Lewisham,FALSE,South East London
+0ef37e213a0bd96373f45880a0971e63,W1K,W,Westminster,TRUE,West London
+880c698113dafeafeed940eec3a3de47,NW3,NW,Camden,TRUE,North West London
+403f320a453cda5e72bd5f5109a92d02,NW6,NW,Camden,TRUE,North West London
+7c6d2eb7ba1cf9e3dc92c32cd25f189a,E8,E,Hackney,FALSE,East London
+84365e66c0e0fa566ba1c14944f4749e,W1U,W,Westminster,TRUE,West London
+2101816468cf84ef223c942de8de6102,E13,E,Newham,FALSE,East London
+197e98f3613d482886294722c3e410d0,EC1R,EC,Islington,TRUE,East Central London
+86215db47d57819b40ef2e1a7028084f,W7,W,Ealing,FALSE,West London
+8b4fb4866d69c2bd7b35713492a3f73f,SE15,SE,Southwark,TRUE,South East London
+5753e2480484e615286ed174f6833a72,N13,N,Enfield,FALSE,North London
+c1e88affd93ebd72bd82ae51cc765558,WC2N,WC,Westminster,TRUE,West Central London
+44fffc422580d51eb2fa66e3dc4908ae,N20,N,Barnet,FALSE,North London
+fdcca8abb533173a8f6e2f235b9a0deb,W10,W,Kensington and Chelsea,TRUE,West London
+b426a0085dea0319813c1aba4c6bf271,E5,E,Hackney,FALSE,East London
+725a5bfc82440320e1d1f882ad6c93d9,SE26,SE,Lewisham,FALSE,South East London
+c22e5866eda6ea3e0f800d0a5fb9a2ad,W1H,W,Westminster,TRUE,West London
+d75f7ac710809b843b420c18ab33648f,EC1M,EC,City of London,TRUE,East Central London
+f55b99dcff034fd4ba676ef9c4efb4f8,EC4A,EC,City of London,TRUE,East Central London
+3ce82f8a6f04f52773a4d95a35ab19e9,W11,W,Kensington and Chelsea,TRUE,West London
+d18a919e4406d51e2d40a3d872ef5b5d,N2,N,Barnet,FALSE,North London
+03e7c235130e7592dbf69beeac563479,SE16,SE,Southwark,TRUE,South East London
+19b8a111b071d54c8996f31b3017f599,EC3N,EC,City of London,TRUE,East Central London
+37481da10b6efe7966c1c2939a273380,NW2,NW,Brent,FALSE,North West London
+d00c75e284c1c8002e6e49d9c94120ad,N7,N,Islington,TRUE,North London
+f4c71920b734f3be8d33d1d254679b18,W12,W,Hammersmith and Fulham,TRUE,West London
+205d8498c08aee4a8bc745e53759db4b,N1,N,Islington,TRUE,North London
+447634a3759a64a7f2ec0a7bd3d613d9,N18,N,Enfield,FALSE,North London
+568e57643b459395208d3d02a926609e,E6,E,Newham,FALSE,East London
+8164c899e50496cc4a845a5179b760f5,NW9,NW,Barnet,FALSE,North West London
+af7f6f2966934b6e7ead1d88024db8c6,SW18,SW,Wandsworth,FALSE,South West London
+a2d150c5df6019de42888b2a294a8384,EC4V,EC,City of London,TRUE,East Central London
+ac3826801f6f92e15e424f3b865f51c8,N8,N,Haringey,FALSE,North London
+62b8282432ed6b0b586769e82d259d1a,SW2,SW,Lambeth,TRUE,South West London
+bb841dd5d1c2c3cc62f636767c0c49a9,SW1A,SW,Westminster,TRUE,South West London
+6352a9aa4e37fe3bfe1e71c9c58c0c0b,EC4R,EC,City of London,TRUE,East Central London
+2896a916d4507b5ad19294d405651745,WC2B,WC,Camden,TRUE,West Central London
+ad2a005dc71d8bd0c7a6c82c69b4ab2e,NW8,NW,Westminster,TRUE,North West London
+707d25aad3006980fa2835c6e21454fa,EC1A,EC,City of London,TRUE,East Central London
+b60f2d4190770bfd554b846a50f119b1,NW5,NW,Camden,TRUE,North West London
+c5f716481c585ed09a3fb04bea4ac44c,WC1E,WC,Camden,TRUE,West Central London
+233c0b3260d7f5d9e29058e36314a847,SW1H,SW,Westminster,TRUE,South West London
+59dc79dbe956193518f70b744366cfd7,SE17,SE,Southwark,TRUE,South East London
+08df1a352ee6c2c7b4267b7f5206965f,SW1Y,SW,Westminster,TRUE,South West London
+98e1bb76b6a1c6bf43fc8bcd934cd1a3,WC1V,WC,Camden,TRUE,West Central London
+7c8e6042404f4ec0feb7c6a087d301b4,WC1R,WC,Camden,TRUE,West Central London
+af43e69fba214a3b7a31ab128eebccd1,EC4M,EC,City of London,TRUE,East Central London
+4c2bca8d43913d7a0098a1c7f88681ca,W1F,W,Westminster,TRUE,West London
+b99795f07993516ab21c45ec8f177cca,E18,E,Redbridge,FALSE,East London
+137feb10baf38342682af7ccc014eaff,SW5,SW,Kensington and Chelsea,TRUE,South West London
+f87dbd30272582e4d69eaaeae4ae6c72,N19,N,Islington,TRUE,North London
+bf7efe05692aaea0726e15cede5b40d7,E10,E,Waltham Forest,FALSE,East London
+dd39134ecf3feaa6348d829dd734683d,N16,N,Hackney,FALSE,North London
+77f070ad942734421f4d42efab41a92b,NW4,NW,Barnet,FALSE,North West London
+aa56ae3fbc891bef2e28d526c3bbe292,N4,N,Haringey,FALSE,North London
+12ab7efaf9de307bf21005b3abe4d494,N1C,N,Camden,TRUE,North London
+c1fac51b12adc85c32e243ad4ef31afb,WC2A,WC,Camden,TRUE,West Central London
+590dd53b8cf4228f96826207ecc00127,SE2,SE,Bexley,FALSE,South East London
+fbf649599aa339d9687cafa4cf4204ff,W14,W,Hammersmith and Fulham,TRUE,West London
+8a2ed791282b0f1ddbab1423c40405d2,SE9,SE,Greenwich,FALSE,South East London
+3f5b31457c6c37178331fb9e477f715d,SE6,SE,Lewisham,FALSE,South East London
+14aa58a56fa7b6020257b4b6433036ac,SW16,SW,Lambeth,TRUE,South West London
+9d52e150db36a1484cc6a4aadfbc240e,SE1,SE,Southwark,TRUE,South East London
+e04f574bcbe9c097f18197fed6097fec,EC3R,EC,City of London,TRUE,East Central London
+1fa7d87ab08d9b694d0532560abb72bc,W1T,W,Westminster,TRUE,West London
+bcc098abf673c57df5ea5b7807f6bd7c,SW15,SW,Wandsworth,FALSE,South West London
+4ba3d78ff33a86b5835c0fa25ba0e4d9,W1G,W,Westminster,TRUE,West London
+e0509a485359011036105b650bcfd69e,SE7,SE,Greenwich,FALSE,South East London
+7f110218a7c3afaaf9c199264ad372ab,EC2V,EC,City of London,TRUE,East Central London
+1f7d3319789e593a594520cca48bfbc1,EC4N,EC,City of London,TRUE,East Central London
+f66e2c04e6b7bf868764bff76cbac854,EC2N,EC,City of London,TRUE,East Central London
+433a96ac23cd9a6168bef8542c70220c,W2,W,Westminster,TRUE,West London
+1e68328f9d8303883e5057b78cc5a1eb,SW6,SW,Hammersmith and Fulham,TRUE,South West London
+f2e35dbc0a606e1eae09758b0e6b8400,EC2Y,EC,City of London,TRUE,East Central London
+be2b978f448423772f819f2356440feb,W3,W,Ealing,FALSE,West London
+f095f530fada5be35f75331bd2ffc1ec,W5,W,Ealing,FALSE,West London
+fe6e2553372a777d32186c5e921f5856,E4,E,Waltham Forest,FALSE,East London
+a2925b9cc5446bb34a7ba578c91f5e52,SW11,SW,Wandsworth,FALSE,South West London
+4e5021ed7606f7da00f53900296d9f45,N22,N,Haringey,FALSE,North London
+92cab8a2f18a31d7fe87449536be0861,E16,E,Newham,FALSE,East London
+25300b56adceda746f1193027bb1655c,SE19,SE,Croydon,FALSE,South East London
+9d5cebc91264af26cacb4b0cf1bbb7c9,NW1,NW,Camden,TRUE,North West London
+1e86ff6eeac0d47f479b486d78b16267,SE10,SE,Greenwich,FALSE,South East London
+c4ad147b3412e53a8aaa0812dd7cb6be,SE27,SE,Lambeth,TRUE,South East London
+20406e7ef38f208680e3e0291e7d94f1,SW8,SW,Lambeth,TRUE,South West London
+63c960f7f43cb6a2d73600739b069928,SW4,SW,Lambeth,TRUE,South West London
+238acaa42e0e8961bed13d2fd0adb57a,SW9,SW,Lambeth,TRUE,South West London
+7ced7403894a61340260e3037ead0ff9,EC3A,EC,City of London,TRUE,East Central London
+d189c56b30e04d14bd4b476170c129de,SE4,SE,Lewisham,FALSE,South East London
+be67fcf4a59874672aa93b1a58e20672,SE5,SE,Southwark,TRUE,South East London
+d6bd3bedcfbfdcb3c75e78152e8ce6a1,WC1H,WC,Camden,TRUE,West Central London
+82553148502cc3c85a075919ea930ab0,W1Y,W,Westminster,TRUE,West London
+c4f15afcdae3796bd0af8e388b5ac4d4,E1,E,Tower Hamlets,FALSE,East London
+3f202db76b01dfcafcb95c1191574a11,E3,E,Tower Hamlets,FALSE,East London
+c541d8ea9f805bfb9dce2314ef9ce2e1,W13,W,Ealing,FALSE,West London
+636a74b7f5ed6208b081386e19452161,E9,E,Hackney,FALSE,East London
+49589ae6f1d56aa3acbcfb8ad4841c9e,SE22,SE,Southwark,TRUE,South East London
+a66f98f4c3d6784843760b2f19d4e5cb,WC1N,WC,Camden,TRUE,West Central London
+14c852d2985890ed391129b5f207b91e,N5,N,Islington,TRUE,North London
+159d87b0f007de657bee8d9be8910723,WC1A,WC,Camden,TRUE,West Central London
+c77f5ba87f4d3f1e7b1bc6f363e86781,SW19,SW,Merton,FALSE,South West London
+55b5efea01836e96f59ac2a5b8fa8170,N10,N,Haringey,FALSE,North London
+5fba5c49d2716723922ddcc5ac911d13,NW11,NW,Barnet,FALSE,North West London
+38e0bbd9c4f51abf32b2820eacb5c20e,N14,N,Enfield,FALSE,North London
+7cabffdbfb630137ef1e87163d4bd93c,SE28,SE,Greenwich,FALSE,South East London
+9465f6c9c6e4510e65421b93faf09bf7,EC1N,EC,City of London,TRUE,East Central London
+12112d4d3b98a1414562dbfddde6b4b9,SW14,SW,Richmond upon Thames,FALSE,South West London
+38815d631e87c471f13e77d7753b107f,W1C,W,Westminster,TRUE,West London
+fbae39b8cac24c3a0ec9b37c4677a079,SW10,SW,Kensington and Chelsea,TRUE,South West London
+d781a0db0f46a71abd8e815b11112bae,SW3,SW,Kensington and Chelsea,TRUE,South West London
+3b17a6a20a3ba6f15b1991f20856f38e,SE12,SE,Lewisham,FALSE,South East London
+da1898f09909cc155812423a0676e09f,SE8,SE,Lewisham,FALSE,South East London
+899e1e9a8ad0366be84b9db7658677a5,W1S,W,Westminster,TRUE,West London
+56b82a4637b6e28cb64b884a8930eb92,SW13,SW,Richmond upon Thames,FALSE,South West London
+1dba5dbe9b358b4da36794b48823868e,E22,E,Newham,FALSE,East London

@@ -1,8 +1,4 @@
-
+# dbt-generated artifacts — regenerated on every `dbt run`/`dbt docs generate`
 target/
 dbt_packages/
 logs/
-# dbt artifacts
-dbt_london_housing/target/
-dbt_london_housing/dbt_packages/
-dbt_london_housing/logs/
