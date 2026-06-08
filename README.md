@@ -1,4 +1,4 @@
-# London Property Investment Intelligence
+# London Property Investment Analysis
 
 > **Business question:** *Where in London should an investor deploy £500K over the next 12 months for the best risk-adjusted return?*
 
