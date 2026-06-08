@@ -1,414 +1,126 @@
-# London Housing Market Analytics Platform
+# London Property Investment Intelligence
 
-> **Central Business Question:** _Where in London should a property investor deploy £500K over the next 12 months for the best risk-adjusted returns?_
+> **Business question:** *Where in London should an investor deploy £500K over the next 12 months for the best risk-adjusted return?*
 
-A production-grade, end-to-end analytics pipeline built on **285,791 HM Land Registry transactions (2021–2024)** — ingested from raw CSV, staged through a cloud data lake, modelled in a 4-layer dbt architecture on Snowflake, and surfaced through an 8-KPI Tableau dashboard that directly answers investor decision-making questions.
-
----
-
-## Dashboard Preview
-
-| Executive Overview                                                  | Borough Comparison                                                  |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| ![Executive Overview](screenshots/dashboard_executive_overview.png) | ![Borough Comparison](screenshots/dashboard_borough_comparison.png) |
-
-| Property Type ROI                                                 | Postcode Heatmap                                                |
-| ----------------------------------------------------------------- | --------------------------------------------------------------- |
-| ![Property Type ROI](screenshots/dashboard_property_type_roi.png) | ![Postcode Heatmap](screenshots/dashboard_postcode_heatmap.png) |
-
-> _Dashboard built in Tableau. Full workbook: [`dashboard/London_Housing_Analytics.twbx`](dashboard/London_Housing_Analytics.twbx)_
+Acting as an analyst for a property investment desk, I analysed **285,791 HM Land Registry transactions (2021–2024, £280B in value)** to answer one decision: where to buy. The output is a 4-page Tableau dashboard that ranks boroughs on growth *and* liquidity, isolates the property types that actually appreciate, and surfaces specific postcodes trading below their borough's median.
 
 ---
 
-## At a Glance
+## Executive summary
 
-|                   |                                                                 |
-| ----------------- | --------------------------------------------------------------- |
-| **Source**        | HM Land Registry Price Paid Data (Open Government Licence v3.0) |
-| **Coverage**      | London, 2021–2024                                               |
-| **Volume**        | 285,791 property transactions                                   |
-| **Pipeline**      | Python → S3 → Snowflake → dbt (4 layers) → Tableau              |
-| **Models**        | 13 dbt models (2 staging, 3 intermediate, 4 marts, 8 KPI views) |
-| **Tests**         | 70+ automated data quality checks                               |
-| **Business KPIs** | 8 investor-facing analytical views                              |
+London as a whole looks flat — the **2024 median was £565K, down 0.88% year-on-year** — but that headline hides the entire opportunity. Underneath the flat average, **individual boroughs ranged from +16.5% to negative**, so the investment question isn't "is London up?" — it's "*which* London?"
 
----
+Three findings drive the recommendation:
 
-## Business Questions Answered
+- **Growth is concentrated in a handful of boroughs.** Islington led at **+16.5% YoY**, followed by Hammersmith & Fulham **+10.6%** and Hackney **+8.4%** — while the London median was *negative*. Buying the index would have lost money; buying the right borough returned double digits.
+- **Liquidity and growth rarely come together.** On a growth-vs-liquidity matrix, the highest-growth boroughs (Islington, H&F) sit in "Growth Markets" — strong upside but *thinner* trading volume, so harder to exit — while the most liquid boroughs (Wandsworth 5.6K sales, Lambeth 4.5K) are slow-growth "Safe Harbour." The investor has to choose which risk to take, consciously.
+- **Property type matters as much as location.** Across London, **Terraced** homes were the most *consistently* appreciating type (almost every borough positive), while **Detached** swung wildly (+81% in one borough, −44% in another) on low volume — a trap for the unwary.
 
-The entire pipeline is built backwards from these 8 investor questions. Every model, join, and transformation exists to answer one or more of them.
-
-| #   | Business Question                                                        | dbt View                         | Dashboard Page     |
-| --- | ------------------------------------------------------------------------ | -------------------------------- | ------------------ |
-| 1   | Which boroughs show consistent price growth vs. high volatility?         | `v_borough_price_trends`         | Price Trends       |
-| 2   | Which boroughs grew fastest year-on-year? Which are slowing?             | `v_borough_yoy_growth`           | Borough Comparison |
-| 3   | Where can I exit quickly if needed? (market liquidity risk)              | `v_borough_transaction_velocity` | Borough Comparison |
-| 4   | What property type delivers the best 4-year ROI per borough?             | `v_property_type_roi_by_borough` | Property Type ROI  |
-| 5   | Which specific postcodes offer the best entry value vs. borough average? | `v_undervalued_postcodes`        | Postcode Heatmap   |
-| 6   | Is the new-build premium worth paying, per borough?                      | `v_new_build_premium`            | Premiums & Tenure  |
-| 7   | What is the freehold price premium vs. leasehold, per borough?           | `v_tenure_premium`               | Premiums & Tenure  |
-| 8   | What are the top-line London market indicators and YoY trend?            | `v_market_health_summary`        | Executive Overview |
+**Recommendation:** For **capital growth**, target Islington / Hammersmith & Fulham in *terraced* or *flat* stock, accepting lower liquidity. For a **liquidity-first** strategy, Wandsworth/Lambeth let you exit fast but expect flat appreciation. For **value entry**, 9 specific postcodes trade >25% below their borough median (detailed below) — though most are cheaper pockets of prime boroughs, not absolute bargains.
 
 ---
 
-## Tech Stack
+## Northstar metrics (2021–2024)
 
-| Layer                | Tool                    | Purpose                                                  |
-| -------------------- | ----------------------- | -------------------------------------------------------- |
-| **Ingestion**        | Python, pandas          | Filter, clean, chunk-load 600MB source CSVs              |
-| **Storage (Bronze)** | AWS S3                  | Raw CSV lake (immutable source-of-truth)                 |
-| **Storage (Silver)** | AWS S3 + Parquet        | Columnar format for efficient Snowflake COPY             |
-| **Warehouse**        | Snowflake               | Cloud analytics database, RAW schema                     |
-| **Transformation**   | dbt (dbt-snowflake)     | 4-layer medallion: staging → intermediate → marts → KPIs |
-| **Orchestration**    | Manual / Phase 9 target | dbt run + test pipeline                                  |
-| **Visualisation**    | Tableau                 | 4-page investor dashboard, `.twbx` packaged workbook     |
-| **Version Control**  | Git / GitHub            | Full lineage of every model change                       |
+| Metric | Value |
+|---|---|
+| Total transaction value analysed | £280.2B |
+| Transactions | 285,791 |
+| 2024 median sale price | £565K |
+| London YoY price change (2024 vs 2023) | −0.88% |
+| Volume cycle | 85.1K (2021) → 59.6K (2023 trough) → 66.0K (2024 recovery) |
 
 ---
 
-## Architecture
+## Insights deep-dive
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│          HM LAND REGISTRY  (England & Wales, 2021–2024)            │
-│                 Raw CSVs  ~600MB  ~2.4M rows total                  │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │  Python ETL (notebooks/01)
-                               │  - Filter to London postcodes only
-                               │  - pandas chunked read (memory-safe)
-                               │  - Output: 285,791 rows
-                               ▼
-                    ┌──────────────────────┐
-                    │   AWS S3 — Bronze    │   Raw CSV (immutable)
-                    │   AWS S3 — Silver    │   Parquet (columnar)
-                    └──────────┬───────────┘
-                               │  Snowflake COPY INTO
-                               ▼
-              ┌─────────────────────────────────────┐
-              │  Snowflake RAW.RAW_LAND_REGISTRY    │
-              │  285,791 rows · untyped strings     │
-              └──────────────────┬──────────────────┘
-                                 │
-                ┌────────────────┼────────────────┐
-                │           dbt run               │
-                ▼                ▼                ▼
-         ┌──────────┐   ┌──────────────┐   ┌──────────┐
-         │ STAGING  │   │ INTERMEDIATE │   │  MARTS   │
-         │ (Views)  │──▶│   (Views)    │──▶│ (Tables) │
-         └──────────┘   └──────────────┘   └──────────┘
-              │                                   │
-       Typed, renamed               Star schema: 1 fact + 3 dims
-       Decoded codes                Surrogate keys, FK tests
-       Derived fields               285,791 fact rows
-                                         │
-                                    ┌────▼─────┐
-                                    │   KPIs   │
-                                    │ (Views)  │
-                                    └────┬─────┘
-                                         │  8 investor views
-                                    ┌────▼──────────────────┐
-                                    │  Tableau Dashboard    │
-                                    │  .twbx packaged       │
-                                    │  4 dashboard pages    │
-                                    └───────────────────────┘
-```
+### 1. The market cycle: a rate-driven dip, then recovery
+![Executive overview](screenshots/dashboard_executive_overview.png)
 
----
+Transaction volume tells the 4-year story cleanly: **85.1K (2021) → 75.2K (2022) → 59.6K (2023) → 66.0K (2024)**. The 2023 trough (−20.8%) lines up exactly with the BoE base rate peaking around 5.25% ("mortgage rate freeze"); 2024 rebounded **+10.7%** as the market recovered. Prices, meanwhile, held broadly flat (median £565K, −0.88%) — so this was a *volume* shock, not a price crash. Context that frames everything below.
 
-## Data Pipeline: 4-Layer Medallion
+### 2. Growth is a borough story, not a London story
+![Borough comparison](screenshots/dashboard_borough_comparison.png)
 
-### Layer 1 — Staging (Views)
+While London was −0.88%, the **top boroughs by 2024 YoY median growth** were:
 
-**Input:** `RAW.RAW_LAND_REGISTRY` — 285,791 rows of raw, untyped Land Registry data.
+| Borough | YoY growth | Median price |
+|---|---|---|
+| Islington | +16.5% | £731K |
+| Hammersmith & Fulham | +10.6% | £815K |
+| Hackney | +8.4% | £701K |
+| Bexley | +3.9% | £383K |
+| Westminster | +3.6% | £1,028K |
 
-**Purpose:** One-to-one cleaning. No business logic. No joins. Every downstream model builds on this foundation, so this layer earns its rigor.
+The spread between the best borough and the London average is ~17 points — which is the whole point: **the average is the wrong unit of analysis for an investor.**
 
-| Model                             | Rows    | Key Transformations                                                                                                                                                                                                                                                                                                                                                 |
-| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `stg_land_registry__transactions` | 285,791 | Cast `sale_date` string → DATE; decode 1-char property codes (D/S/T/F/O → Detached/Semi/Terraced/Flat/Other); decode tenure (F→Freehold, L→Leasehold); decode new-build flag (Y/N → Boolean); derive `sale_year`, `sale_quarter`, `sale_month`; extract `postcode_district` (e.g., SW1A) and `postcode_area` (e.g., SW); drop £0 prices, null postcodes, null dates |
-| `stg_postcode_boroughs`           | ~330    | Standardise casing and trim whitespace on hand-curated postcode→borough seed                                                                                                                                                                                                                                                                                        |
+### 3. Growth vs liquidity — you can't have both
+![Borough investment matrix](screenshots/dashboard_borough_matrix.png)
 
-**Tests:** 14 — unique transaction_id, not_null on all key columns, accepted_values validating all decoded categorical fields (property type, tenure, PPD type).
+Plotting YoY growth against transaction volume splits London into four quadrants:
+- **Growth Markets (high growth, thinner liquidity):** Islington, Hammersmith & Fulham — biggest upside, but fewer buyers when you sell.
+- **Safe Harbour (liquid, flat):** Wandsworth (5.6K sales), Lambeth (4.5K), Southwark (3.9K) — easy to exit, slow appreciation.
+- **Avoid (declining + illiquid):** capital trapped.
+
+This reframes the decision from "what's growing?" to "**what risk am I willing to hold — illiquidity or stagnation?**"
+
+### 4. Property type: chase consistency, not the biggest number
+![Property type intelligence](screenshots/dashboard_property_type_roi.png)
+
+4-year (2021→2024) growth by type across boroughs:
+- **Terraced** — most *consistent* gains, positive in almost every borough (e.g. Bexley/Redbridge +11%). The reliable pick.
+- **Flat** — broadly positive (Hounslow +14%), one notable negative (Bexley −12%).
+- **Semi-detached** — solid, led by Hackney +26%.
+- **Detached** — *highest variance*: +81% in Hammersmith & Fulham but −44% in Kensington & Chelsea. These are thin-volume segments where a few sales swing the number — **high risk of a misleading signal**, not a safe bet.
+
+Also quantified: a steep **new-build premium** (e.g. Westminster existing £966K vs new-build £1,600K) and large **freehold-vs-leasehold premiums** in prime boroughs (City of London 469%, Westminster 283%, Camden 162%).
+
+### 5. Hidden gems: 9 postcodes trading >25% below their borough median
+![Hidden gems undervalued postcodes](screenshots/dashboard_postcode_heatmap.png)
+
+Comparing each postcode's median to its parent borough's (2023–24, min. 30 transactions), the distribution was: 77 in line, 28 at significant premium, 24 undervalued (10–25%), 15 premium, and **9 "significantly undervalued" (>25% below):**
+
+| Postcode | Borough | Postcode median | Borough median | Gap |
+|---|---|---|---|---|
+| SW1V | Westminster | £655K | £1,584K | −58.7% |
+| W9 | Westminster | £680K | £1,584K | −57.1% |
+| WC1H | Camden | £408K | £880K | −53.7% |
+| NW8 | Westminster | £859K | £1,584K | −45.8% |
+| WC2H | Westminster | £900K | £1,584K | −43.2% |
+| W2 | Westminster | £950K | £1,584K | −40.0% |
+| W10 | Kensington & Chelsea | £719K | £1,150K | −37.5% |
+| SW1P | Westminster | £1,067K | £1,584K | −32.7% |
+| NW5 | Camden | £658K | £880K | −25.3% |
+
+**Honest read:** 7 of the 9 sit in Westminster or K&C, so these are *relative* value — cheaper pockets within ultra-prime boroughs, often reflecting more flats/leasehold stock — not absolute bargains. The genuinely interesting signal is the *gap*: a buyer wanting a Westminster/K&C address can enter 30–58% below the borough median in these districts, which is exactly the kind of micro-targeting the borough-level view would miss.
 
 ---
 
-### Layer 2 — Intermediate (Views)
+## Recommendations (tied to the numbers)
 
-**Input:** Staging views.
-
-**Purpose:** Business logic enrichment. Joins, price classification, and analytical flags are computed once here and reused everywhere. This eliminates duplication across KPI views and BI tools.
-
-**Dependency chain:** `enriched` → `priced` → `flagged`
-
-| Model                                     | Key Logic                                                                                                                                                                                                 |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `int_transactions__enriched_with_borough` | LEFT JOIN to postcode-borough seed on `postcode_district`. Unmatched postcodes → `'Unmatched'` (not NULL — keeps records queryable, enables coverage tracking).                                           |
-| `int_transactions__priced`                | Add `price_band` (7 ordered tiers: Under £250K → £5M+, numbered to force correct BI sort order) and `market_segment` (4 tiers: Affordable / Mid-Market / Premium / Super-Prime).                          |
-| `int_transactions__flagged`               | Add 7 Boolean flags pre-computed for high-performance BI filtering: `is_central_london`, `is_prime_postcode_area`, `is_million_plus`, `is_super_prime`, `is_most_recent_year`, `is_flat`, `is_leasehold`. |
-
-**Tests:** 8 — accepted_values on price_band/market_segment, uniqueness preservation through the chain.
+1. **Capital-growth strategy → Islington or Hammersmith & Fulham.** They returned +16.5% / +10.6% while London was −0.88%; accept the lower liquidity (they sit in the "Growth Markets" quadrant) as the price of that upside.
+2. **Liquidity-first strategy → Wandsworth or Lambeth.** 5.6K / 4.5K annual sales means a fast exit, but model flat appreciation, not growth.
+3. **Pick the property type deliberately → favour Terraced (and selectively Flats).** They appreciated consistently; treat headline Detached numbers (+81%) with suspicion because they ride on tiny transaction counts.
+4. **For value entry → screen the 9 sub-median postcodes**, but underwrite each individually — confirm the discount reflects stock mix (flats/leasehold) rather than a structural problem before deploying capital.
 
 ---
 
-### Layer 3 — Marts (Tables, Star Schema)
+## How the analysis was built *(technical appendix)*
 
-**Input:** `int_transactions__flagged` + `dbt_utils.date_spine`.
+<details>
+<summary>Pipeline, data model, and engineering detail (click to expand)</summary>
 
-**Purpose:** Denormalized analytics tables optimized for repeated BI queries. Materialized as **tables** (not views) because Tableau queries the fact table on every user interaction — pre-computed tables eliminate re-scanning 285,791 rows on each click.
+**Stack:** Python → AWS S3 → Snowflake → dbt → Tableau.
 
-```
-                        ┌──────────────┐
-                        │   dim_date   │
-                        │  1,461 rows  │
-                        │  date_key PK │
-                        └──────┬───────┘
-                               │ date_key FK
-                               │
-┌──────────────┐   location_key FK   ┌────────────────────┐   property_key FK   ┌───────────────┐
-│ dim_location │◄────────────────────│  fact_transactions  │────────────────────►│ dim_property  │
-│  ~150 rows   │                     │   285,791 rows      │                     │   5–6 rows    │
-│ location_key │                     │   transaction_key PK│                     │ property_key  │
-│     PK       │                     │                     │                     │     PK        │
-└──────────────┘                     │  MEASURES:          │                     └───────────────┘
-                                     │  sale_price         │
-                                     │  sale_price_M_plus  │
-                                     │  transaction_count  │
-                                     └────────────────────┘
-```
+- **Ingestion:** filtered HM Land Registry's England & Wales Price Paid Data (~600MB, ~2.4M rows) to **285,791 London transactions** via a memory-safe chunked pandas pipeline; landed raw CSV (bronze) and Parquet (silver) in S3, loaded to Snowflake.
+- **Transformation (dbt, 4-layer medallion):** staging (typing, decoding property/tenure codes, deriving postcode districts) → intermediate (borough enrichment, price bands, analytical flags) → **marts: a Kimball star schema** (`fact_transactions` 285,791 rows + `dim_date`, `dim_location`, `dim_property`, MD5 surrogate keys) → **8 KPI views**, one per business question (`v_borough_yoy_growth`, `v_undervalued_postcodes`, etc.).
+- **Quality:** **70+ automated dbt tests** (unique, not_null, accepted_values, relationships enforcing zero orphaned fact rows). Window functions (`LAG`, `RANK`, `NTILE`) isolated to the KPI layer; minimum 30–50 transaction thresholds on aggregations to avoid misleading single-sale stats.
+- **Full methodology:** [`docs/methodology.md`](docs/methodology.md). **Code/SQL:** `/dbt_london_housing`. **Dashboard:** `dashboard/London_Housing_Analytics.twbx`.
 
-| Dimension      | Rows  | Grain                                                       | Key Attributes                                                                                          |
-| -------------- | ----- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `dim_date`     | 1,461 | One row per calendar day (2021–2024)                        | Year, quarter, month, week, day-of-week, is_weekend, period boundaries, year_quarter label              |
-| `dim_location` | ~150  | One row per unique (postcode_district, borough) combination | postcode_district, postcode_area, borough, is_central_london, london_region (8 values)                  |
-| `dim_property` | 5–6   | One row per property type code                              | property_type_code, property_type_name, property_description, property_category (House/Apartment/Other) |
-
-**Surrogate keys** are MD5 hashes (via `dbt_utils.generate_surrogate_key`) — deterministic, source-system-agnostic, and collision-free at this row count.
-
-**Tests:** 35+ — unique/not_null on all primary keys, `relationships` tests enforcing full referential integrity (fact → every dimension, zero orphaned rows guaranteed).
+**Caveats:** nominal prices (no inflation adjustment); postcode→borough mapping covers ~95% of transactions; 2024 under-counts slightly due to ~2-month registration lag; sale-price only (no rental-yield/leverage data).
+</details>
 
 ---
 
-### Layer 4 — KPI Views (Business Questions)
-
-**Input:** `fact_transactions` joined to dimension tables.
-
-**Purpose:** Translate the star schema into directly actionable investor intelligence. Each view answers one investor question and feeds one Tableau dashboard page.
-
-**Materialisation:** Views (zero storage cost — always fresh on query).
-
-#### `v_borough_price_trends`
-
-Quarterly median and average prices per borough, with price volatility ratio (stddev ÷ mean). Identifies boroughs with consistent appreciation vs. erratic markets. Powers time-series trend charts.
-
-#### `v_borough_yoy_growth`
-
-Year-on-year price and volume growth per borough, computed with `LAG()` window functions. Produces `yoy_median_change_pct`, `yoy_avg_change_pct`, and `yoy_volume_change_pct` — the primary ranking signal for capital growth investors.
-
-#### `v_borough_transaction_velocity`
-
-Annual transaction counts per borough, ranked with `RANK()` and bucketed into 4 liquidity tiers with `NTILE(4)` (High / Moderate / Lower / Thin). Answers the exit-risk question: thin-market boroughs may appreciate but are harder to sell quickly.
-
-#### `v_property_type_roi_by_borough`
-
-Four-year price growth (2021 → 2024) segmented by property type per borough. Filters to combinations with ≥50 transactions to exclude statistical noise. Answers: _should I buy a flat or a house here, and which type appreciated more?_
-
-#### `v_undervalued_postcodes`
-
-Compares each postcode district's median price to its parent borough median (using 2023–2024 transactions only, post-COVID market normalisation). Buckets into five value positions: Significantly Undervalued (>25% below), Undervalued (10–25%), In Line, Premium, Significant Premium (>25% above). Minimum 30 transactions per postcode for statistical relevance. Enables micro-targeted entry at below-borough prices.
-
-#### `v_new_build_premium`
-
-Pivot analysis: median price for new builds vs. existing stock per borough, with minimum 50 transactions in each category. Outputs `premium_gbp` and `premium_pct`. Answers: _is the developer markup worth the warranty and depreciation risk?_
-
-#### `v_tenure_premium`
-
-Freehold vs. leasehold median price comparison per borough (≥50 transactions each). A high freehold premium signals strong ownership preference in that market — relevant to both entry price and future resale appeal.
-
-#### `v_market_health_summary`
-
-London-wide annual KPIs with YoY comparison via `LAG()`: total transactions, median price, total GBP volume, million-plus and super-prime deal counts, active boroughs, and YoY change percentages. Powers executive-level KPI cards and frames the macro context for all other analysis.
-
----
-
-## dbt DAG (Model Lineage)
-
-### Phase 5–7 Lineage (Staging → Marts)
-
-![dbt Lineage Phase 5](screenshots/dbt_lineage_phase5.png)
-![dbt Lineage Phase 6](screenshots/dbt_lineage_phase6.png)
-![dbt Lineage Phase 7](screenshots/dbt_lineage_phase7_full.png)
-
-### Full Lineage Including KPI Layer
-
-![dbt Lineage Full](screenshots/dbt_lineage_full_kpi.png)
-
----
-
-## Data Quality
-
-**70+ automated tests across all 4 layers** — dbt will not deploy a broken model.
-
-| Test Type         | What It Catches           | Example                                           |
-| ----------------- | ------------------------- | ------------------------------------------------- |
-| `unique`          | Duplicate primary keys    | Duplicate transaction_ids entering the fact table |
-| `not_null`        | Missing required values   | Null borough after the LEFT JOIN                  |
-| `accepted_values` | Out-of-range categoricals | An unexpected property type code in source data   |
-| `relationships`   | Orphaned foreign keys     | A fact row with a date_key not found in dim_date  |
-
-**Key design decisions for data integrity:**
-
-- LEFT JOIN on postcode→borough mapping (never drop data; flag as `'Unmatched'`)
-- Filters on £0 prices, null postcodes, null dates applied at staging (closest to source)
-- `NTILE`, `LAG`, and window functions isolated to KPI views (no leaking into fact table)
-- Minimum transaction thresholds (30–50) on aggregation views to prevent misleading single-sale statistics
-
----
-
-## Project Structure
-
-```
-london-housing-analytics/
-│
-├── notebooks/
-│   ├── 01_data_ingestion.ipynb          # Filter England & Wales → London, output Parquet
-│   ├── 02_upload_raw_csv_to_s3.ipynb    # Bronze layer (S3 raw CSV)
-│   └── 03_upload_parquet_to_s3.ipynb    # Silver layer (S3 Parquet)
-│
-├── dbt_london_housing/
-│   ├── models/
-│   │   ├── staging/
-│   │   │   ├── stg_land_registry__transactions.sql
-│   │   │   ├── stg_postcode_boroughs.sql
-│   │   │   ├── sources.yml
-│   │   │   └── stg_models.yml
-│   │   ├── intermediate/
-│   │   │   ├── int_transactions__enriched_with_borough.sql
-│   │   │   ├── int_transactions__priced.sql
-│   │   │   ├── int_transactions__flagged.sql
-│   │   │   └── int_models.yml
-│   │   └── marts/
-│   │       ├── fact_transactions.sql
-│   │       ├── dim_date.sql
-│   │       ├── dim_location.sql
-│   │       ├── dim_property.sql
-│   │       ├── mart_models.yml
-│   │       └── kpi/
-│   │           ├── v_borough_price_trends.sql
-│   │           ├── v_borough_yoy_growth.sql
-│   │           ├── v_borough_transaction_velocity.sql
-│   │           ├── v_property_type_roi_by_borough.sql
-│   │           ├── v_undervalued_postcodes.sql
-│   │           ├── v_new_build_premium.sql
-│   │           ├── v_tenure_premium.sql
-│   │           ├── v_market_health_summary.sql
-│   │           └── kpi_models.yml
-│   ├── seeds/
-│   │   └── london_postcode_boroughs.csv # ~330 postcode → borough mappings
-│   ├── macros/
-│   │   └── generate_schema_name.sql     # Custom schema naming (prevents dev/prod collisions)
-│   ├── dbt_project.yml
-│   └── packages.yml                     # dbt-utils 1.3.0
-│
-├── dashboard/
-│   ├── data/                            # CSV exports from Snowflake KPI views
-│   ├── extracts/                        # Tableau .hyper extract files
-│   ├── London_Housing_Analytics.twb
-│   └── London_Housing_Analytics.twbx   # Packaged Tableau workbook
-│
-├── docs/
-│   └── methodology.md                   # Transformation decisions and analytical rationale
-│
-├── screenshots/                         # Pipeline and dashboard screenshots
-├── data/
-│   ├── raw/                             # Original CSVs (gitignored)
-│   └── processed/                       # Cleaned Parquet files (gitignored)
-├── requirements.txt
-├── .env.example                         # Snowflake credentials template
-└── .gitignore
-```
-
----
-
-## Running the Pipeline
-
-### Prerequisites
-
-```bash
-pip install -r requirements.txt
-cp .env.example .env
-# Fill in Snowflake credentials in .env
-```
-
-### Python ETL (Ingestion)
-
-Run notebooks in order:
-
-```
-notebooks/01_data_ingestion.ipynb       # Filter to London, produce Parquet
-notebooks/02_upload_raw_csv_to_s3.ipynb # Upload bronze layer to S3
-notebooks/03_upload_parquet_to_s3.ipynb # Upload silver layer to S3
-```
-
-### dbt (Transformation)
-
-```bash
-cd dbt_london_housing
-
-# Install dependencies
-dbt deps
-
-# Load seed file (postcode → borough mapping)
-dbt seed
-
-# Run all models (staging → intermediate → marts → KPIs)
-dbt run
-
-# Run all 70+ data quality tests
-dbt test
-
-# Run + test in one command
-dbt build
-```
-
-### Snowflake Schema Layout
-
-| dbt Layer    | Snowflake Schema         | Materialisation |
-| ------------ | ------------------------ | --------------- |
-| Staging      | `LONDON_HOUSING.STAGING` | Views           |
-| Intermediate | `LONDON_HOUSING.STAGING` | Views           |
-| Marts        | `LONDON_HOUSING.MARTS`   | Tables          |
-| KPI Views    | `LONDON_HOUSING.MARTS`   | Views           |
-
----
-
-## Known Limitations
-
-| Limitation                   | Detail                                                                                                                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Postcode coverage**        | Hand-curated mapping covers ~95% of London transactions. Edge postcodes near the M25 boundary may be marked `'Unmatched'`. Production use would use the ONS Postcode Directory. |
-| **2024 data completeness**   | HM Land Registry has a ~2-month registration lag. Late-2024 transactions may be under-represented.                                                                              |
-| **Nominal prices**           | No inflation adjustment applied. YoY % comparisons are in nominal GBP terms.                                                                                                    |
-| **Share transfers excluded** | The source data excludes property purchases via share/company transfer (PPD type B filtered at source).                                                                         |
-| **No mortgage data**         | Analysis is based on sale price only. Rental yield and leverage analysis would require external data sources.                                                                   |
-
----
-
-## Data Source
-
-**HM Land Registry Price Paid Data**
-[gov.uk/government/statistical-data-sets/price-paid-data-downloads](https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads)
-
-Licensed under the Open Government Licence v3.0. Contains HM Land Registry data © Crown copyright and database right 2024.
-
----
-
-## Methodology
-
-See [`docs/methodology.md`](docs/methodology.md) for detailed rationale behind:
-
-- London filtering criteria
-- Price band and market segment definitions
-- Central London borough classification
-- Postcode-to-borough join strategy (LEFT JOIN rationale)
-- Star schema design choices (degenerate dimensions, surrogate keys)
-- KPI view filtering thresholds (minimum transaction counts)
+**Irfan Arif** — Data Analyst · MSc FinTech, BSc Computer Science
+[Live Tableau dashboard](https://public.tableau.com/app/profile/irfan.arif1826/viz/London_Housing_Analytics/Executive_Overview) · [LinkedIn](https://linkedin.com/in/irfanarif7) · [GitHub](https://github.com/IrfanArif61)
