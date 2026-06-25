@@ -35,7 +35,7 @@ Three findings drive the recommendation:
 ## Insights deep-dive
 
 ### 1. The market cycle: a rate-driven dip, then recovery
-![Executive overview](screenshots/dashboard_executive_overview.png)
+![Executive overview](screenshots/dashboard_executive_overviews.png)
 
 Transaction volume tells the 4-year story cleanly: **85.1K (2021) → 75.2K (2022) → 59.6K (2023) → 66.0K (2024)**. The 2023 trough (−20.8%) lines up exactly with the BoE base rate peaking around 5.25% ("mortgage rate freeze"); 2024 rebounded **+10.7%** as the market recovered. Prices, meanwhile, held broadly flat (median £565K, −0.88%) — so this was a *volume* shock, not a price crash. Context that frames everything below.
 
